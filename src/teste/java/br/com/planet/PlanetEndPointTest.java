@@ -26,6 +26,7 @@ public class PlanetEndPointTest {
 	@Autowired
 	private  MockMvc mockMvc;
 	
+	
 	@Test
 	public void should_return_planet_alderaan_created() throws Exception {
 
@@ -128,6 +129,7 @@ public class PlanetEndPointTest {
 				.andExpect(jsonPath("$.name", is("Coruscant")))
 				.andExpect(jsonPath("$.climate", is("temperate")))
 				.andExpect(jsonPath("$.terrain", is("terrain")))
+				 .andExpect(jsonPath("$.quantity", is(4)))
 				.andExpect(status().is2xxSuccessful());
 		
 	}
@@ -135,13 +137,23 @@ public class PlanetEndPointTest {
 	@Test
 	public void should_return_planet_by_id() throws Exception {
 			
-		createPlanet("Geonosis");
+        JSONObject planetDto= new JSONObject()
+                .put("name", "Kam")
+                .put("climate", "temperate")
+                .put("terrain", "terrain");
+        
+        this.mockMvc.perform(post("/v1/planet")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(planetDto.toString()))
+                .andDo(print())
+                .andExpect(jsonPath("$.name", is("Kam")))
+                .andExpect(jsonPath("$.climate", is("temperate")))
+                .andExpect(jsonPath("$.terrain", is("terrain")))
+                .andExpect(jsonPath("$.quantity", is(0)))
+                .andExpect(status().isCreated());
 		
 		this.mockMvc.perform(get("/v1/planet/1"))
 				.andDo(print())
-				.andExpect(jsonPath("$.name", is("Geonosis")))
-				.andExpect(jsonPath("$.climate", is("temperate")))
-				.andExpect(jsonPath("$.terrain", is("terrain")))
 				.andExpect(status().is2xxSuccessful());
 	}
 	
@@ -152,25 +164,7 @@ public class PlanetEndPointTest {
 				andExpect(status().isNotFound());
 	}
 	
-	@Test
-	public void should_return_bad_request_by_id() throws Exception {
-		this.mockMvc.perform(get("/v1/planet/id/A"))
-				.andDo(print()).
-				andExpect(status().isBadRequest());
-	}
-	
-	@Test
-	public void should_return_planet_ok() throws Exception {
-		
-		createPlanet("Kaminooo");
 
-		this.mockMvc.perform(get("/v1/planet/1"))
-				.andDo(print())
-				.andExpect(jsonPath("$.name", is("Kaminooo")))
-				.andExpect(jsonPath("$.climate", is("temperate")))
-				.andExpect(jsonPath("$.terrain", is("terrain")))
-				.andExpect(status().is2xxSuccessful());
-	}
 	
 	@Test
 	public void should_return_not_found_delete() throws Exception {

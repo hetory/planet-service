@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -23,7 +22,6 @@ import br.com.planet.entity.PlanetEntity;
 import br.com.planet.service.PlanetService;
 
 @RestController
-@Scope("singleton")
 @RequestMapping("/v1")
 public class PlanetEndpoint {
 
