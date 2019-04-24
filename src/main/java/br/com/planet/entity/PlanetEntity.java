@@ -13,7 +13,7 @@ import javax.persistence.Id;
 public class PlanetEntity implements Serializable{
 
 	private static final long serialVersionUID = 9165902477233200293L;
-		
+
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
@@ -86,4 +86,10 @@ public class PlanetEntity implements Serializable{
     public int hashCode() {
         return Objects.hash(name, climate,terrain);
     }
+    
+	@Override
+	public String toString() {
+		return "PlanetEntity [id=" + id + ", name=" + name + ", climate=" + climate + ", terrain=" + terrain
+				+ ", quantity=" + quantity + "]";
+	}
 }

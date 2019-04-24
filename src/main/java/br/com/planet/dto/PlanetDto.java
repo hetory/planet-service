@@ -72,4 +72,10 @@ public class PlanetDto implements Serializable {
     public int hashCode() {
         return Objects.hash(name, climate,terrain,quantity);
     }
+    
+	@Override
+	public String toString() {
+		return "PlanetDto [name=" + name + ", climate=" + climate + ", terrain=" + terrain + ", quantity=" + quantity
+				+ "]";
+	}
 }

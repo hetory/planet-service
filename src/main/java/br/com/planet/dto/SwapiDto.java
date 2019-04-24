@@ -27,4 +27,9 @@ public class SwapiDto {
     public int hashCode() {
         return Objects.hash(results);
     }
+    
+	@Override
+	public String toString() {
+		return "SwapiDto [results=" + results + "]";
+	}
 }

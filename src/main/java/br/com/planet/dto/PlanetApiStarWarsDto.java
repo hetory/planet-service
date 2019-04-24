@@ -41,4 +41,9 @@ public class PlanetApiStarWarsDto {
     public int hashCode() {
         return Objects.hash(name, films);
     }
+    
+    @Override
+	public String toString() {
+		return "PlanetApiStarWarsDto [name=" + name + ", films=" + films + "]";
+	}
 }

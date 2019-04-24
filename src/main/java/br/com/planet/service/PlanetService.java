@@ -32,6 +32,7 @@ public class PlanetService {
 	public PlanetEntity save(PlanetDto planetDto){
 		
 		SwapiDto dto = findAllPlanetsStarWars();
+		
 		planetDto.setQuantity(0);
 		
 		if (dto != null && dto.getResults()!=null) {
@@ -77,12 +78,7 @@ public class PlanetService {
 		}
 	}
 	
-	public Boolean deleteById(Long id){
-		try{
-			planetRepository.deleteById(id);
-			return true;
-		}catch (IllegalArgumentException e) {
-			return false;
-		}
+	public void deleteById(Long id){
+		planetRepository.deleteById(id);
 	}	
 }
